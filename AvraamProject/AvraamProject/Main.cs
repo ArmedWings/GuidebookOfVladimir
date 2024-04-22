@@ -129,7 +129,7 @@ namespace AvraamProject
             for (int i = 0; i < 6; i++)
             {
                 CheckBox checkbox = new CheckBox { WidthRequest = 50, HeightRequest = 50, Color = Color.FromHex(AccentManager.MainTextAccent), IsChecked = true };
-                SvgCachedImage icon = new SvgCachedImage { Source = iconSources[i], WidthRequest = 50, HeightRequest = 50, ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "fill=\"#000000\"", $"fill=\"{AccentManager.MainTextAccent}\"" } } };
+                SvgCachedImage icon = new SvgCachedImage { Source = iconSources[i], WidthRequest = 35, HeightRequest = 35, ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "fill=\"#000000\"", $"fill=\"{AccentManager.MainTextAccent}\"" } } };
                 Label label = new Label { Text = labelTexts[i], VerticalTextAlignment = TextAlignment.Center, TextColor = Color.FromHex(AccentManager.MainTextAccent) };
 
                 StackLayout stack = new StackLayout { Orientation = StackOrientation.Horizontal, Spacing = 10 };
@@ -506,7 +506,7 @@ namespace AvraamProject
                 for (int i = 0; i < 6; i++)
                 {
                     CheckBox checkbox = new CheckBox { WidthRequest = 50, HeightRequest = 50, Color = Color.FromHex(AccentManager.MainTextAccent), IsChecked = true };
-                    SvgCachedImage icon = new SvgCachedImage { Source = iconSources[i], WidthRequest = 50, HeightRequest = 50, ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "fill=\"#000000\"", $"fill=\"{AccentManager.MainTextAccent}\"" } } };
+                    SvgCachedImage icon = new SvgCachedImage { Source = iconSources[i], WidthRequest = 35, HeightRequest = 35, ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "fill=\"#000000\"", $"fill=\"{AccentManager.MainTextAccent}\"" } } };
                     Label label = new Label { Text = labelTexts[i], VerticalTextAlignment = TextAlignment.Center, TextColor = Color.FromHex(AccentManager.MainTextAccent) };
 
                     StackLayout stack = new StackLayout { Orientation = StackOrientation.Horizontal, Spacing = 10, Opacity = 0 };
