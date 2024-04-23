@@ -95,7 +95,7 @@ namespace AvraamProject
 
             menuStackLayout = new StackLayout
             {
-                Spacing = 3,
+                Spacing = 10,
                 Children =
                 {
                     new AbsoluteLayout
@@ -128,7 +128,7 @@ namespace AvraamProject
 
             for (int i = 0; i < 6; i++)
             {
-                CheckBox checkbox = new CheckBox { WidthRequest = 50, HeightRequest = 50, Color = Color.FromHex(AccentManager.MainTextAccent), IsChecked = true };
+                CheckBox checkbox = new CheckBox { WidthRequest = 25, HeightRequest = 25, Color = Color.FromHex(AccentManager.MainTextAccent), IsChecked = true };
                 SvgCachedImage icon = new SvgCachedImage { Source = iconSources[i], WidthRequest = 35, HeightRequest = 35, ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "fill=\"#000000\"", $"fill=\"{AccentManager.MainTextAccent}\"" } } };
                 Label label = new Label { Text = labelTexts[i], VerticalTextAlignment = TextAlignment.Center, TextColor = Color.FromHex(AccentManager.MainTextAccent) };
 
@@ -505,7 +505,7 @@ namespace AvraamProject
             {
                 for (int i = 0; i < 6; i++)
                 {
-                    CheckBox checkbox = new CheckBox { WidthRequest = 50, HeightRequest = 50, Color = Color.FromHex(AccentManager.MainTextAccent), IsChecked = true };
+                    CheckBox checkbox = new CheckBox { WidthRequest = 25, HeightRequest = 25, Color = Color.FromHex(AccentManager.MainTextAccent), IsChecked = true };
                     SvgCachedImage icon = new SvgCachedImage { Source = iconSources[i], WidthRequest = 35, HeightRequest = 35, ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "fill=\"#000000\"", $"fill=\"{AccentManager.MainTextAccent}\"" } } };
                     Label label = new Label { Text = labelTexts[i], VerticalTextAlignment = TextAlignment.Center, TextColor = Color.FromHex(AccentManager.MainTextAccent) };
 
