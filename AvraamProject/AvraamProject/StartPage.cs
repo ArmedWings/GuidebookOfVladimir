@@ -94,7 +94,7 @@ namespace AvraamProject
             AbsoluteLayout.SetLayoutFlags(scrollView, AbsoluteLayoutFlags.All);
             AbsoluteLayout.SetLayoutBounds(button1, new Rectangle(0.5, 0.75, 0.65, 0.18));
             AbsoluteLayout.SetLayoutFlags(button1, AbsoluteLayoutFlags.All);
-            if (Application.Current.Properties["Opt"].ToString() == "3") ScrollToEndAsync();
+            if (!(Application.Current.Properties["Opt"].ToString() == "3")) ScrollToEndAsync();
         }
 
 
@@ -174,15 +174,15 @@ namespace AvraamProject
             string optString = "";
 
             if (accent == "1") {
-                optString = opt == "1" ? "pano1.jpg" : opt == "2" ? "lowpano1.jpg" : "transparent.png";
+                optString = opt == "1" ? "pano1.jpg" : opt == "2" ? "lowpano1.jpg" : "";
             }
 
             if (accent == "2") {
-                optString = opt == "1" ? "pano2.jpg" : opt == "2" ? "lowpano2.jpg" : "transparent.png";
+                optString = opt == "1" ? "pano2.jpg" : opt == "2" ? "lowpano2.jpg" : "";
             }
 
             if (accent == "3") {
-                optString = opt == "1" ? "pano3.jpg" : opt == "2" ? "lowpano3.jpg" : "transparent.png";
+                optString = opt == "1" ? "pano3.jpg" : opt == "2" ? "lowpano3.jpg" : "";
             }
             Console.WriteLine(accent,opt,optString);
             return optString;
