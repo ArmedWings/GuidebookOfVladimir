@@ -9,6 +9,7 @@ using FFImageLoading.Svg.Forms;
 using FFImageLoading.Forms;
 using System.Collections;
 using Xamarin.Essentials;
+using FFImageLoading;
 
 
 namespace AvraamProject
@@ -248,6 +249,80 @@ namespace AvraamProject
 
             placesStackLayout = new StackLayout();
 
+            var searchBlock = new Frame
+            {
+                HeightRequest = Application.Current.MainPage.Height * 0.05,
+                BackgroundColor = Color.FromHex(AccentManager.MainAppAccent),
+                Margin = new Thickness(0, 0, 0, 10), // Отступ снизу для разделения с контентом
+                Padding = new Thickness(10),
+                HasShadow = true
+            };
+
+            // Элемент ввода текста для поиска
+            var searchEntry = new Entry
+            {
+                Placeholder = "Поиск",
+                TextColor = Color.FromHex(AccentManager.MainTextAccent),
+                PlaceholderColor = Color.FromHex(AccentManager.SideTextAccent),
+                WidthRequest = Application.Current.MainPage.Width * 0.7 // Ширина в 70% от ширины экрана
+            };
+
+            // Кнопка фильтра с SVG изображением
+            var filterButton = new SvgCachedImage
+            {
+                Source = "AvraamProject/Resources/drawable/filter.svg",
+                WidthRequest = 35,
+                HeightRequest = 35,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center,
+                ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "fill=\"#000000\"", $"fill=\"{AccentManager.MainTextAccent}\"" } }
+            };
+
+            // Добавляем TapGestureRecognizer
+            var tapGesture = new TapGestureRecognizer();
+            tapGesture.Tapped += async (s, e) => await OpenMenu();
+            
+            filterButton.GestureRecognizers.Add(tapGesture);
+
+            var searchImage = new SvgCachedImage
+            {
+                Source = "AvraamProject/Resources/drawable/search.svg",
+                WidthRequest = 35,
+                HeightRequest = 35,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center,
+                ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "fill=\"#000000\"", $"fill=\"{AccentManager.MainTextAccent}\"" } }
+            };
+
+            var SearchtapGesture = new TapGestureRecognizer();
+            SearchtapGesture.Tapped += async (s, e) => {
+                if (!isFunctionRunning)  // Проверка, не запущена ли функция
+                {
+
+                    isFunctionRunning = true;  // Установка флага в true перед запуском функции
+                    CreatePlaceBlocks(searchEntry.Text);
+                    await Task.Delay(2000);
+                    isFunctionRunning = false;  // Сброс флага после завершения функции
+                }
+                else
+                {
+                    await DisplayAlert("Пожалуйста, подождите", "Поиск уже производится", "OK");
+                }
+            };
+            searchImage.GestureRecognizers.Add(SearchtapGesture);
+
+            // Добавляем элементы в блок поиска
+            searchBlock.Content = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                Spacing = 10,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center,
+                Children = { filterButton, searchImage, searchEntry }
+            };
+
+            // Добавляем блок поиска в верхнюю часть экрана
+            placesStackLayout.Children.Insert(0, searchBlock);
 
             CreatePlaceBlocks();
 
@@ -321,10 +396,13 @@ namespace AvraamProject
             this.Content = absoluteLayout;
         }
 
-        private async void CreatePlaceBlocks()
+        private async void CreatePlaceBlocks(string searchText = null)
         {
             // Очищаем все дочерние элементы scrollView
-            placesStackLayout.Children.Clear();
+            for (int i = placesStackLayout.Children.Count - 1; i > 0; i--)
+            {
+                placesStackLayout.Children.RemoveAt(i);
+            }
 
             var tempPlaces = PlaceData.GetPlaces().Where(p => selectedItems.Contains(p.Type)).ToList();
 
@@ -334,6 +412,15 @@ namespace AvraamProject
             else if (sortPicker.SelectedIndex == 3) tempPlaces = tempPlaces.OrderBy(p => Guid.NewGuid()).ToList();
 
             if (IsSortInversed) tempPlaces.Reverse();
+
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                tempPlaces = tempPlaces.Where(p => p.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)
+                                                 || p.Description.Contains(searchText, StringComparison.OrdinalIgnoreCase)
+                                                 || p.Type.Contains(searchText, StringComparison.OrdinalIgnoreCase)
+                                                 || p.Category.Contains(searchText, StringComparison.OrdinalIgnoreCase)
+                                                 || p.Address.Contains(searchText, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
 
             if (tempPlaces.Count == 0)
             {
