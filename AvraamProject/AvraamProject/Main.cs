@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using AvraamProject.Models;
 using AvraamProject.Data;
+using AvraamProject;
 using System.Linq;
 using FFImageLoading.Svg.Forms;
 using FFImageLoading.Forms;
@@ -66,11 +67,11 @@ namespace AvraamProject
 
         public Main()
         {
-            
+            BackgroundColor = Color.FromHex(AccentManager.SideAppAccent);
 
             absoluteLayout = new AbsoluteLayout();
 
-            Image image = new Image { Source = "pano.png", Aspect = Aspect.AspectFill,Opacity=1 };
+            Image image = new Image { Source = AvraamProject.StartPage.SetBackground(Application.Current.Properties["Accent"].ToString(), Application.Current.Properties["Opt"].ToString()), Aspect = Aspect.AspectFill,Opacity=1 };
 
             menuWidth = Application.Current.MainPage.Width * 0.55;
             menuHeight = Application.Current.MainPage.Height * menuWidth / Application.Current.MainPage.Width;

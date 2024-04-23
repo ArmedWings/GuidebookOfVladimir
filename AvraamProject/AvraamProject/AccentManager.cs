@@ -23,7 +23,7 @@ namespace AvraamProject
             else if ((string)Application.Current.Properties["Accent"] == "3")
             {
                 AccentManager.MainAppAccent = "#FFFFFF";
-                AccentManager.SideAppAccent = "#D9D9D9";
+                AccentManager.SideAppAccent = "#EFEFEF";
                 AccentManager.MainTextAccent = "#000000";
                 AccentManager.SideTextAccent = "#7E7E7E";
             }

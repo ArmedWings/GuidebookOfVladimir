@@ -195,6 +195,46 @@ namespace AvraamProject
                     break;
             }
 
+            var FullRadio = new RadioButton { Content = "Высокое качество фона", TextColor = Color.FromHex(AccentManager.MainTextAccent) };
+            var LowRadio = new RadioButton { Content = "Низкое качество фона", TextColor = Color.FromHex(AccentManager.MainTextAccent) };
+            var SimpleRadio = new RadioButton { Content = "Монотонный фон", TextColor = Color.FromHex(AccentManager.MainTextAccent) };
+            
+
+            var OptimizationFrame = new Frame
+            {
+                BackgroundColor = Color.FromHex(AccentManager.MainAppAccent),
+                CornerRadius = 10, // Скругляем углы
+                Padding = new Thickness(10),
+                Content = new StackLayout
+                {
+                    Children =
+                    {
+                        new Label
+                        {
+                            Text = "Оптимизация",
+                            TextColor = Color.FromHex(AccentManager.SideTextAccent)
+                        },
+                        FullRadio,
+                        LowRadio,
+                        SimpleRadio
+                    }
+                }
+            };
+            mainLayout.Children.Add(OptimizationFrame);
+
+            switch (Application.Current.Properties["Opt"] as string)
+            {
+                case "1":
+                    FullRadio.IsChecked = true;
+                    break;
+                case "2":
+                    LowRadio.IsChecked = true;
+                    break;
+                case "3":
+                    SimpleRadio.IsChecked = true;
+                    break;
+            }
+
             // Кнопка "Подтвердить"
             var confirmButton = new Button
             {
@@ -223,9 +263,22 @@ namespace AvraamProject
                 {
                     Application.Current.Properties["Screen"] = "1"; // "Всегда"
                 }
-                else if (neverRadio.IsChecked)
+                else
                 {
                     Application.Current.Properties["Screen"] = "2"; // "Никогда"
+                }
+
+                if (FullRadio.IsChecked)
+                {
+                    Application.Current.Properties["Opt"] = "1"; // "Всегда"
+                }
+                else if (LowRadio.IsChecked)
+                {
+                    Application.Current.Properties["Opt"] = "2"; // "Никогда"
+                }
+                else
+                {
+                    Application.Current.Properties["Opt"] = "3"; // "Никогда"
                 }
 
                 await Application.Current.SavePropertiesAsync();
@@ -245,6 +298,8 @@ namespace AvraamProject
                 };
             };
             mainLayout.Children.Add(confirmButton);
+
+            
 
             Content = mainScrollView;
         }

@@ -52,7 +52,7 @@ namespace AvraamProject
             countLabel = new Label
             {
                 Text = $"{carouselView.Position + 1}/{images.Count}",
-                TextColor = Color.White,
+                TextColor = Color.FromHex(AccentManager.MainTextAccent),
                 FontSize = 14,
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.End,

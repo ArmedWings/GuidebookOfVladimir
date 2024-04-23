@@ -16,7 +16,6 @@ namespace AvraamProject
             
             //Application.Current.Properties.Remove("IsFirstRun");
             InitializeComponent();
-
             if (Application.Current.Properties.ContainsKey("IsFirstRun") && (bool)Application.Current.Properties["IsFirstRun"] == false)
             { }
             else
@@ -25,6 +24,7 @@ namespace AvraamProject
                 Application.Current.Properties["Accent"] = "1";
                 Application.Current.Properties["Language"] = "ru";
                 Application.Current.Properties["Screen"] = "1";
+                Application.Current.Properties["Opt"] = "1";
 
                 // Сохранение изменений
                 Application.Current.SavePropertiesAsync();

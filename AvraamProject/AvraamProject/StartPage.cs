@@ -7,6 +7,7 @@ using SkiaSharp.Extended.Svg;
 using Xamarin.Forms;
 using FFImageLoading.Svg.Forms;
 using Xamarin.Forms.PlatformConfiguration;
+using System.Runtime.InteropServices;
 
 
 
@@ -24,10 +25,13 @@ namespace AvraamProject
             NavigationPage.SetHasNavigationBar(this, false);
             AbsoluteLayout AbsoluteLayout = new AbsoluteLayout();
 
+            BackgroundColor = Color.FromHex(AccentManager.SideAppAccent);
+
             panoramaImage = new Image
             {
-                Source = "pano.jpg",
-                Aspect = Aspect.AspectFill
+                Source = SetBackground(Application.Current.Properties["Accent"].ToString(), Application.Current.Properties["Opt"].ToString()),
+                Aspect = Aspect.AspectFill,
+                Opacity = Application.Current.Properties["Opt"].ToString() == "3" ? 0 : 1
             };
 
             scrollView = new ScrollView
@@ -51,7 +55,7 @@ namespace AvraamProject
             var settingIco = new SvgCachedImage
             {
                 Source = "AvraamProject/Resources/drawable/settings.svg",
-                ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "fill=\"#000000\"", $"fill=\"{AccentManager.SideTextAccent}\"" } },
+                ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "fill=\"#000000\"", $"fill=\"{AccentManager.MainTextAccent}\"" } },
             };
 
             settingIco.GestureRecognizers.Add(new TapGestureRecognizer
@@ -68,10 +72,10 @@ namespace AvraamProject
                 FontFamily  = "Seminaria",
                 FontSize = 50,
                 HorizontalTextAlignment = TextAlignment.Center,
-                TextColor = Color.FromHex(AccentManager.SideTextAccent)
+                TextColor = Color.FromHex(AccentManager.MainTextAccent)
             };
 
-            AbsoluteLayout.SetLayoutBounds(Welcome, new Rectangle(0.5, 0.25, 400, 200));
+            AbsoluteLayout.SetLayoutBounds(Welcome, new Rectangle(0.5, 0.25, 350, 100));
             AbsoluteLayout.SetLayoutFlags(Welcome, AbsoluteLayoutFlags.PositionProportional);
 
             AbsoluteLayout.SetLayoutBounds(settingIco, new Rectangle(0.97, 0.02, 40, 40));
@@ -90,8 +94,7 @@ namespace AvraamProject
             AbsoluteLayout.SetLayoutFlags(scrollView, AbsoluteLayoutFlags.All);
             AbsoluteLayout.SetLayoutBounds(button1, new Rectangle(0.5, 0.75, 0.65, 0.18));
             AbsoluteLayout.SetLayoutFlags(button1, AbsoluteLayoutFlags.All);
-
-            ScrollToEndAsync();
+            if (Application.Current.Properties["Opt"].ToString() == "3") ScrollToEndAsync();
         }
 
 
@@ -165,6 +168,25 @@ namespace AvraamProject
         private async void ToMain(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Main());
+        }
+        public static string SetBackground(string accent, string opt)
+        {
+            string optString = "";
+
+            if (accent == "1") {
+                optString = opt == "1" ? "pano1.jpg" : opt == "2" ? "lowpano1.jpg" : "transparent.png";
+            }
+
+            if (accent == "2") {
+                optString = opt == "1" ? "pano2.jpg" : opt == "2" ? "lowpano2.jpg" : "transparent.png";
+            }
+
+            if (accent == "3") {
+                optString = opt == "1" ? "pano3.jpg" : opt == "2" ? "lowpano3.jpg" : "transparent.png";
+            }
+            Console.WriteLine(accent,opt,optString);
+            return optString;
+            
         }
     }
 }
