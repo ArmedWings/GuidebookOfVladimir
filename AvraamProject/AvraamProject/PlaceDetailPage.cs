@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AvraamProject.Data;
+using AvraamProject.Models;
+using FFImageLoading.Svg.Forms;
 using Xamarin.Forms;
 
 namespace AvraamProject
@@ -9,6 +12,8 @@ namespace AvraamProject
     {
         private CarouselView carouselView;
         private Label countLabel;
+        private SvgCachedImage favoriteIco;
+        private List<int> favoritePlacesIds = new List<int>();
         private void OnCarouselPositionChanged(object sender, PositionChangedEventArgs e)
         {
             var images = carouselView.ItemsSource as List<string>;
@@ -25,6 +30,35 @@ namespace AvraamProject
 
             BackgroundColor = Color.FromHex(AccentManager.SideAppAccent);  // Установка фона страницы
 
+            favoriteIco = new SvgCachedImage
+            {
+                Source = "AvraamProject/Resources/drawable/star.svg",
+                ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "fill=\"#000000\"", $"fill=\"{AccentManager.MainTextAccent}\"" } },
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Center,
+                WidthRequest = 50,
+                HeightRequest = 50,
+                Margin = new Thickness(15)
+            };
+
+            favoriteIco.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command(() => OnFavoriteIconTapped(place.Id))
+            });
+
+            if (Application.Current.Properties.ContainsKey("favoritePlacesIds"))
+            {
+                string idsString = Application.Current.Properties["favoritePlacesIds"] as string;
+                favoritePlacesIds = idsString.Split(',').Select(id => int.TryParse(id, out int parsedId) ? parsedId : 0).Where(id => id != 0).ToList();
+            }
+            if (favoritePlacesIds.Contains(placeId))
+            {
+                favoriteIco.Source = "AvraamProject/Resources/drawable/starfull.svg"; // Изменяем иконку на пустую звезду
+            }
+            else
+            {
+                favoriteIco.Source = "AvraamProject/Resources/drawable/star.svg"; // Изменяем иконку на заполненную звезду
+            }
             var images = new List<string>
             {
                 $"lowplace{place.Id}_1",
@@ -49,14 +83,16 @@ namespace AvraamProject
                 })
             };
 
+            
+
             countLabel = new Label
             {
                 Text = $"{carouselView.Position + 1}/{images.Count}",
                 TextColor = Color.FromHex(AccentManager.MainTextAccent),
                 FontSize = 14,
-                VerticalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Start,
                 HorizontalOptions = LayoutOptions.End,
-                Margin = new Thickness(10, 5)
+                Margin = new Thickness(0, 5)
             };
 
             carouselView.PositionChanged += OnCarouselPositionChanged;
@@ -140,7 +176,7 @@ namespace AvraamProject
 
             var contentStack = new StackLayout
             {
-                Children = { countLabel, carouselView, nameLabel, descriptionLabel, ratingLabel, addressLabel, openInBrowserButton, viewOnMapButton },
+                Children = { countLabel, carouselView, nameLabel, descriptionLabel, ratingLabel, addressLabel, favoriteIco, openInBrowserButton, viewOnMapButton },
                 Padding = new Thickness(0)
             };
 
@@ -158,6 +194,35 @@ namespace AvraamProject
                 Content = frame,
                 Padding = new Thickness(0, 0, 0, 20)
             };
+        }
+        private async void OnFavoriteIconTapped(int placeId)
+        {
+            // Проверяем, содержится ли placeId в списке избранных мест
+            if (Application.Current.Properties.ContainsKey("favoritePlacesIds"))
+            {
+                string idsString = Application.Current.Properties["favoritePlacesIds"] as string;
+                favoritePlacesIds = idsString.Split(',').Select(id => int.TryParse(id, out int parsedId) ? parsedId : 0).Where(id => id != 0).ToList();
+            }
+
+            // Проверяем, содержится ли placeId в списке избранных мест
+            if (favoritePlacesIds.Contains(placeId))
+            {
+                favoritePlacesIds.Remove(placeId);
+                // Удалите placeId из списка избранных
+                favoriteIco.Source = "AvraamProject/Resources/drawable/star.svg"; // Изменяем иконку на пустую звезду
+            }
+            else
+            {
+                favoritePlacesIds.Add(placeId);
+                // Добавьте placeId в список избранных
+                favoriteIco.Source = "AvraamProject/Resources/drawable/starfull.svg"; // Изменяем иконку на заполненную звезду
+            }
+
+            // Сохраняем список в свойствах приложения
+            Application.Current.Properties["favoritePlacesIds"] = string.Join(",", favoritePlacesIds);
+            await Application.Current.SavePropertiesAsync();
+
+            // Обновляем иконку
         }
     }
 }
