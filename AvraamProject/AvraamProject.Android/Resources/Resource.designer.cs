@@ -19437,9 +19437,6 @@ namespace AvraamProject.Droid
 			// aapt resource value: 0x7F0700C0
 			public const int tooltip_frame_light = 2131165376;
 			
-			// aapt resource value: 0x7F0700C1
-			public const int transparent = 2131165377;
-			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

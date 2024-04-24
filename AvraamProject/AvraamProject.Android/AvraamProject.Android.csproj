@@ -166,16 +166,19 @@
     <AndroidResource Include="Resources\drawable\search.svg" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\pano3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\pano2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <AndroidResource Include="Resources\drawable\lowpano1.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\transparent.png" />
+    <AndroidResource Include="Resources\drawable\lowpano3.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\lowpano2.jpg" />
-    <AndroidResource Include="Resources\drawable\lowpano3.jpg" />
-    <AndroidResource Include="Resources\drawable\pano2.jpg" />
-    <AndroidResource Include="Resources\drawable\pano3.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

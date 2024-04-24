@@ -196,9 +196,15 @@ namespace AvraamProject
             }
 
             var FullRadio = new RadioButton { Content = "Высокое качество фона", TextColor = Color.FromHex(AccentManager.MainTextAccent) };
-            var LowRadio = new RadioButton { Content = "Низкое качество фона", TextColor = Color.FromHex(AccentManager.MainTextAccent) };
+            var LowRadio = new RadioButton { Content = "Размытый фон", TextColor = Color.FromHex(AccentManager.MainTextAccent) };
             var SimpleRadio = new RadioButton { Content = "Монотонный фон", TextColor = Color.FromHex(AccentManager.MainTextAccent) };
-            
+
+            var optLabel = new Label
+            {
+                Text = "Оптимизация",
+                TextColor = Color.FromHex(AccentManager.MainTextAccent)
+            };
+            mainLayout.Children.Add(optLabel);
 
             var OptimizationFrame = new Frame
             {
@@ -211,7 +217,7 @@ namespace AvraamProject
                     {
                         new Label
                         {
-                            Text = "Оптимизация",
+                            Text = "Задний фон",
                             TextColor = Color.FromHex(AccentManager.SideTextAccent)
                         },
                         FullRadio,
