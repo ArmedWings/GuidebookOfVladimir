@@ -19429,13 +19429,19 @@ namespace AvraamProject.Droid
 			public const int shop = 2131165373;
 			
 			// aapt resource value: 0x7F0700BE
-			public const int test_custom_background = 2131165374;
+			public const int star = 2131165374;
 			
 			// aapt resource value: 0x7F0700BF
-			public const int tooltip_frame_dark = 2131165375;
+			public const int starfull = 2131165375;
 			
 			// aapt resource value: 0x7F0700C0
-			public const int tooltip_frame_light = 2131165376;
+			public const int test_custom_background = 2131165376;
+			
+			// aapt resource value: 0x7F0700C1
+			public const int tooltip_frame_dark = 2131165377;
+			
+			// aapt resource value: 0x7F0700C2
+			public const int tooltip_frame_light = 2131165378;
 			
 			static Drawable()
 			{

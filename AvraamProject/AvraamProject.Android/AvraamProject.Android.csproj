@@ -180,5 +180,9 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\lowpano2.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\starfull.svg" />
+    <AndroidResource Include="Resources\drawable\star.svg" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
