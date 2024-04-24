@@ -37,6 +37,8 @@ namespace AvraamProject
         private bool IsSortInversed = false;
         private Picker sortPicker;
         private bool isFunctionRunning;
+        private bool isFavoriteFilter;
+        private List<int> favoritePlacesIds = new List<int>();
         private HashSet<string> selectedItems = new HashSet<string>
         {
             "Развлечения",
@@ -70,6 +72,8 @@ namespace AvraamProject
             BackgroundColor = Color.FromHex(AccentManager.SideAppAccent);
 
             absoluteLayout = new AbsoluteLayout();
+
+            isFavoriteFilter = new bool();
 
             Image image = new Image { Source = AvraamProject.StartPage.SetBackground(Application.Current.Properties["Accent"].ToString(), Application.Current.Properties["Opt"].ToString()), Aspect = Aspect.AspectFill,Opacity=1 };
 
@@ -127,7 +131,27 @@ namespace AvraamProject
             };
 
             //AbsoluteLayout.SetLayoutBounds(menuFrame, new Rectangle(0, 0, menuWidth, Application.Current.MainPage.Height));
+            CheckBox checkbox1 = new CheckBox { WidthRequest = 25, HeightRequest = 25, Color = Color.FromHex(AccentManager.MainTextAccent) };
+            SvgCachedImage icon1 = new SvgCachedImage { Source = "AvraamProject/Resources/drawable/starfull.svg", WidthRequest = 35, HeightRequest = 35, ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "fill=\"#000000\"", $"fill=\"{AccentManager.MainTextAccent}\"" } } };
+            Label label1 = new Label { Text = "Избранное", VerticalTextAlignment = TextAlignment.Center, TextColor = Color.FromHex(AccentManager.MainTextAccent) };
 
+            StackLayout stack1 = new StackLayout { Orientation = StackOrientation.Horizontal, Spacing = 10 };
+            stack1.Children.Add(checkbox1);
+            stack1.Children.Add(icon1);
+            stack1.Children.Add(label1);
+
+            menuStackLayout.Children.Add(stack1);
+            checkbox1.CheckedChanged += (s, e) =>
+            {
+                if (checkbox1.IsChecked)
+                {
+                    isFavoriteFilter = true;
+                }
+                else
+                {
+                    isFavoriteFilter = false;
+                };
+            };
             for (int i = 0; i < 6; i++)
             {
                 CheckBox checkbox = new CheckBox { WidthRequest = 25, HeightRequest = 25, Color = Color.FromHex(AccentManager.MainTextAccent), IsChecked = true };
@@ -161,6 +185,7 @@ namespace AvraamProject
                     };
                 }
             }
+            
 
             sortPicker = new Picker
             {
@@ -407,6 +432,16 @@ namespace AvraamProject
 
             var tempPlaces = PlaceData.GetPlaces().Where(p => selectedItems.Contains(p.Type)).ToList();
 
+            if (Application.Current.Properties.ContainsKey("favoritePlacesIds"))
+            {
+                string idsString = Application.Current.Properties["favoritePlacesIds"] as string;
+                favoritePlacesIds = idsString.Split(',').Select(id => int.TryParse(id, out int parsedId) ? parsedId : 0).Where(id => id != 0).ToList();
+                if (isFavoriteFilter)
+                {
+                    tempPlaces = tempPlaces.Where(place => favoritePlacesIds.Contains(place.Id)).ToList();
+                }
+            }
+
             if (sortPicker.SelectedIndex == 0) tempPlaces = tempPlaces.OrderByDescending(p => p.Popularity).ToList();
             else if (sortPicker.SelectedIndex == 1) tempPlaces = tempPlaces.OrderByDescending(p => p.Rating).ToList();
             else if (sortPicker.SelectedIndex == 2) tempPlaces = tempPlaces.OrderBy(p => p.Name).ToList();
@@ -488,8 +523,12 @@ namespace AvraamProject
                         CornerRadius = 10,
                         BackgroundColor = Color.FromHex(AccentManager.MainAppAccent),
                         HasShadow = true,  // Добавим тень для отделения блоков
-                        Margin = new Thickness(20, 10, 20, 0)  // Отступы от краев экрана
+                        Margin = new Thickness(20, 10, 20, 0),  // Отступы от краев экрана
                     };
+                    if (favoritePlacesIds.Contains(place.Id))
+                    {
+                        frame.BorderColor = Color.FromHex(AccentManager.MainTextAccent);  // Устанавливаем обводку желтого цвета для избранных мест
+                    }
 
                     var tapGestureRecognizer = new TapGestureRecognizer();
                     tapGestureRecognizer.Tapped += async (s, e) =>
@@ -571,6 +610,7 @@ namespace AvraamProject
         {
             if (closeImage.Opacity == 1)
             {
+                isFavoriteFilter = false;
                 List<StackLayout> stacksToRemove = new List<StackLayout>();
 
                 foreach (var child in menuStackLayout.Children)
@@ -591,6 +631,29 @@ namespace AvraamProject
             }
             else
             {
+                isFavoriteFilter = false;
+                CheckBox checkbox1 = new CheckBox { WidthRequest = 25, HeightRequest = 25, Color = Color.FromHex(AccentManager.MainTextAccent) };
+                SvgCachedImage icon1 = new SvgCachedImage { Source = "AvraamProject/Resources/drawable/starfull.svg", WidthRequest = 35, HeightRequest = 35, ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "fill=\"#000000\"", $"fill=\"{AccentManager.MainTextAccent}\"" } } };
+                Label label1 = new Label { Text = "Избранное", VerticalTextAlignment = TextAlignment.Center, TextColor = Color.FromHex(AccentManager.MainTextAccent) };
+
+                StackLayout stack1 = new StackLayout { Orientation = StackOrientation.Horizontal, Spacing = 10, Opacity = 0 };
+                stack1.Children.Add(checkbox1);
+                stack1.Children.Add(icon1);
+                stack1.Children.Add(label1);
+
+                menuStackLayout.Children.Insert(1, stack1);
+                checkbox1.CheckedChanged += (s, e) =>
+                {
+                    if (checkbox1.IsChecked)
+                    {
+                        isFavoriteFilter = true;
+                    }
+                    else
+                    {
+                        isFavoriteFilter = false;
+                    };
+                };
+                await stack1.FadeTo(1, 200, Easing.Linear);
                 for (int i = 0; i < 6; i++)
                 {
                     CheckBox checkbox = new CheckBox { WidthRequest = 25, HeightRequest = 25, Color = Color.FromHex(AccentManager.MainTextAccent), IsChecked = true };
@@ -605,7 +668,7 @@ namespace AvraamProject
                         stack.Children.Add(icon);
                         stack.Children.Add(label);
 
-                        menuStackLayout.Children.Insert(1 + i, stack);  // Вставляем после первого элемента
+                        menuStackLayout.Children.Insert(2 + i, stack);  // Вставляем после первого элемента
 
                         checkBoxes.Add(checkbox);
 
