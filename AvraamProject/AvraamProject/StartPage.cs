@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using FFImageLoading.Svg.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using System.Runtime.InteropServices;
+using lang;
 
 
 
@@ -22,6 +23,7 @@ namespace AvraamProject
 
         public StartPage()
         {
+            var uiLang = Application.Current.Properties["Language"].ToString();
             NavigationPage.SetHasNavigationBar(this, false);
             AbsoluteLayout AbsoluteLayout = new AbsoluteLayout();
 
@@ -82,7 +84,7 @@ namespace AvraamProject
 
             Label Welcome = new Label
             {
-                Text = "Путеводитель по\nВладимиру",
+                Text = t.text("welcome", uiLang),
                 FontFamily  = "Seminaria",
                 FontSize = 50,
                 HorizontalTextAlignment = TextAlignment.Center,
