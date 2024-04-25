@@ -59,6 +59,8 @@ namespace AvraamProject
             {
                 favoriteIco.Source = "AvraamProject/Resources/drawable/star.svg"; // Изменяем иконку на заполненную звезду
             }
+
+
             var images = new List<string>
             {
                 $"lowplace{place.Id}_1",
