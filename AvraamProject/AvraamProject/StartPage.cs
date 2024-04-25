@@ -41,14 +41,23 @@ namespace AvraamProject
                 Orientation = ScrollOrientation.Horizontal,
                 Content = panoramaImage
             };
+            var gradientBrush = new LinearGradientBrush
+            {
+                StartPoint = new Point(0, 0.5),
+                EndPoint = new Point(1, 0.5),
+                GradientStops = new GradientStopCollection
+                {
+                    new GradientStop { Color = Color.FromHex(AccentManager.MainAppAccent), Offset = 0.0f },
+                    new GradientStop { Color = Color.FromHex(AccentManager.SideTextAccent), Offset = 1.0f }
+                }
+            };
             Button button1 = new Button
             {
-                Text = "Начать",
+                Text = t.text("start", uiLang),
                 FontSize = 30,
                 FontFamily = "Seminaria",
                 BorderWidth = 3,
-                BorderColor = Color.FromHex(AccentManager.SideAppAccent),
-                BackgroundColor = Color.FromHex(AccentManager.MainAppAccent),  // Устанавливаем цвет фона
+                Background = gradientBrush,  // Устанавливаем цвет фона
                 TextColor = Color.FromHex(AccentManager.MainTextAccent),       // Устанавливаем цвет текста
                 CornerRadius = 20                                            // Устанавливаем радиус скругления углов
             };
@@ -112,7 +121,7 @@ namespace AvraamProject
 
             AbsoluteLayout.SetLayoutBounds(scrollView, new Rectangle(0, 0, 1, 1));
             AbsoluteLayout.SetLayoutFlags(scrollView, AbsoluteLayoutFlags.All);
-            AbsoluteLayout.SetLayoutBounds(button1, new Rectangle(0.5, 0.75, 0.65, 0.18));
+            AbsoluteLayout.SetLayoutBounds(button1, new Rectangle(0.5, 0.75, 0.65, 0.13));
             AbsoluteLayout.SetLayoutFlags(button1, AbsoluteLayoutFlags.All);
             if (!(Application.Current.Properties["Opt"].ToString() == "3")) ScrollToEndAsync();
         }

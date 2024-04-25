@@ -15,8 +15,15 @@ namespace lang
                         { "ru", "Путеводитель по\nВладимиру" },
                         { "en", "Guidebook of\nVladimir" },
                     }
+                },
+                { "start", new Dictionary<string, string>()
+                    {
+                        { "ru", "Начать" },
+                        { "en", "Start" },
+                    }
                 }
             };
+
             return tran[key][language];
         }
     }
