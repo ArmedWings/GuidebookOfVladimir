@@ -184,5 +184,55 @@
     <AndroidResource Include="Resources\drawable\star.svg" />
     <AndroidResource Include="Resources\drawable\starfull.svg" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\lowplace7_1.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace7_2.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace7_3.jpg" />
+    <AndroidResource Include="Resources\drawable\place7_1.jpg" />
+    <AndroidResource Include="Resources\drawable\place7_2.jpg" />
+    <AndroidResource Include="Resources\drawable\place7_3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\lowplace6_1.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace6_2.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace6_3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\place6_1.jpg" />
+    <AndroidResource Include="Resources\drawable\place6_2.jpg" />
+    <AndroidResource Include="Resources\drawable\place6_3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\place8_1.jpg" />
+    <AndroidResource Include="Resources\drawable\place8_2.jpg" />
+    <AndroidResource Include="Resources\drawable\place8_3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\lowplace8_1.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace8_2.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace8_3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\place10_1.jpg" />
+    <AndroidResource Include="Resources\drawable\place10_2.jpg" />
+    <AndroidResource Include="Resources\drawable\place10_3.jpg" />
+    <AndroidResource Include="Resources\drawable\place11_1.jpg" />
+    <AndroidResource Include="Resources\drawable\place11_2.jpg" />
+    <AndroidResource Include="Resources\drawable\place11_3.jpg" />
+    <AndroidResource Include="Resources\drawable\place9_1.jpg" />
+    <AndroidResource Include="Resources\drawable\place9_2.jpg" />
+    <AndroidResource Include="Resources\drawable\place9_3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\lowplace10_1.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace10_2.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace10_3.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace11_1.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace11_2.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace11_3.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace9_1.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace9_2.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace9_3.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

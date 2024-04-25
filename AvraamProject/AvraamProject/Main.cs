@@ -45,7 +45,7 @@ namespace AvraamProject
             "Гастрономия",
             "Отдых",
             "Магазины",
-            "Больницы",
+            "Медицина",
             "Образование"
         };
         private string[] labelTexts =
@@ -54,7 +54,7 @@ namespace AvraamProject
             "Гастрономия",
             "Отдых",
             "Магазины",
-            "Больницы",
+            "Медицина",
             "Образование"
         };
         string[] iconSources =
@@ -397,7 +397,7 @@ namespace AvraamProject
                             "Гастрономия",
                             "Отдых",
                             "Магазины",
-                            "Больницы",
+                            "Медицина",
                             "Образование"
                         };
                         await ToggleCloseImageVisibility();
@@ -454,7 +454,6 @@ namespace AvraamProject
                 tempPlaces = tempPlaces.Where(p => p.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)
                                                  || p.Description.Contains(searchText, StringComparison.OrdinalIgnoreCase)
                                                  || p.Type.Contains(searchText, StringComparison.OrdinalIgnoreCase)
-                                                 || p.Category.Contains(searchText, StringComparison.OrdinalIgnoreCase)
                                                  || p.Address.Contains(searchText, StringComparison.OrdinalIgnoreCase)).ToList();
             }
 
