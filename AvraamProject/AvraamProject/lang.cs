@@ -360,6 +360,30 @@ namespace lang
                         { "en", "Shopping Center" },
                     }
                 },
+                { "Филер и Шалопай", new Dictionary<string, string>()
+                    {
+                        { "ru", "Филер и Шалопай" },
+                        { "en", "A Filer and a Scamp" },
+                    }
+                },
+                { "Фастфуд", new Dictionary<string, string>()
+                    {
+                        { "ru", "Фастфуд" },
+                        { "en", "Fastfood" },
+                    }
+                },
+                { "Бургер Кинг", new Dictionary<string, string>()
+                    {
+                        { "ru", "Бургер Кинг" },
+                        { "en", "Burger King" },
+                    }
+                },
+                { "Ресторан американской кухни", new Dictionary<string, string>()
+                    {
+                        { "ru", "Ресторан американской кухни" },
+                        { "en", "American Cuisine Restaurant" },
+                    }
+                },
                 { "Парк аттракционов", new Dictionary<string, string>()
                     {
                         { "ru", "Парк аттракционов" },
@@ -460,6 +484,24 @@ namespace lang
                     {
                         { "ru", "ул. Горького, 94, Владимир, Владимирская обл., 600026" },
                         { "en", "94, Gorkogo St., Vladimir, Vladimir Oblast, Russia, 600026" },
+                    }
+                },
+                { "АДРЕС12", new Dictionary<string, string>()
+                    {
+                        { "ru", "ул. Большая Московская ул., 11, Владимир, Владимирская обл., Россия, 600000" },
+                        { "en", "11 Bolshaya Moskovskaya st., Vladimir, Vladimir region, Russia, 600000" },
+                    }
+                },
+                { "АДРЕС13", new Dictionary<string, string>()
+                    {
+                        { "ru", "пр. Ленина, 29, Владимир, Владимирская обл., Россия, 600015" },
+                        { "en", "29 Lenin Ave., Vladimir, Vladimir region, Russia, 600015" },
+                    }
+                },
+                { "АДРЕС14", new Dictionary<string, string>()
+                    {
+                        { "ru", "Георгиевкая ул., 9, Владимир, Владимирская обл., 600000" },
+                        { "en", "Georgievskaya St., 9, Vladimir, Vladimir region, 600000" },
                     }
                 },
 

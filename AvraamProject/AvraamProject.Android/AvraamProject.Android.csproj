@@ -240,6 +240,28 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\info.svg" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\place13_1.jpg" />
+    <AndroidResource Include="Resources\drawable\place13_2.jpg" />
+    <AndroidResource Include="Resources\drawable\place13_3.jpg" />
+    <AndroidResource Include="Resources\drawable\place12_1.jpg" />
+    <AndroidResource Include="Resources\drawable\place12_2.jpg" />
+    <AndroidResource Include="Resources\drawable\place12_3.jpg" />
+    <AndroidResource Include="Resources\drawable\place14_1.jpg" />
+    <AndroidResource Include="Resources\drawable\place14_2.jpg" />
+    <AndroidResource Include="Resources\drawable\place14_3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\lowplace13_1.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace13_2.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace13_3.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace12_1.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace12_2.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace12_3.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace14_1.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace14_2.jpg" />
+    <AndroidResource Include="Resources\drawable\lowplace14_3.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
