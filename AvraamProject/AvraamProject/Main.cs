@@ -11,6 +11,7 @@ using FFImageLoading.Forms;
 using System.Collections;
 using Xamarin.Essentials;
 using FFImageLoading;
+using lang;
 
 
 namespace AvraamProject
@@ -39,23 +40,24 @@ namespace AvraamProject
         private bool isFunctionRunning;
         private bool isFavoriteFilter;
         private List<int> favoritePlacesIds = new List<int>();
+        private static string uiLang = Application.Current.Properties["Language"].ToString();
         private HashSet<string> selectedItems = new HashSet<string>
         {
-            "Развлечения",
-            "Гастрономия",
-            "Отдых",
-            "Магазины",
-            "Медицина",
-            "Образование"
+            t.text("entertainment", uiLang),
+            t.text("gastronomy", uiLang),
+            t.text("rest", uiLang),
+            t.text("stores", uiLang),
+            t.text("medicine", uiLang),
+            t.text("education", uiLang)
         };
         private string[] labelTexts =
         {
-            "Развлечения",
-            "Гастрономия",
-            "Отдых",
-            "Магазины",
-            "Медицина",
-            "Образование"
+            t.text("entertainment", uiLang),
+            t.text("gastronomy", uiLang),
+            t.text("rest", uiLang),
+            t.text("stores", uiLang),
+            t.text("medicine", uiLang),
+            t.text("education", uiLang)
         };
         string[] iconSources =
         {
@@ -133,7 +135,7 @@ namespace AvraamProject
             //AbsoluteLayout.SetLayoutBounds(menuFrame, new Rectangle(0, 0, menuWidth, Application.Current.MainPage.Height));
             CheckBox checkbox1 = new CheckBox { WidthRequest = 25, HeightRequest = 25, Color = Color.FromHex(AccentManager.MainTextAccent) };
             SvgCachedImage icon1 = new SvgCachedImage { Source = "AvraamProject/Resources/drawable/starfull.svg", WidthRequest = 35, HeightRequest = 35, ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "fill=\"#000000\"", $"fill=\"{AccentManager.MainTextAccent}\"" } } };
-            Label label1 = new Label { Text = "Избранное", VerticalTextAlignment = TextAlignment.Center, TextColor = Color.FromHex(AccentManager.MainTextAccent) };
+            Label label1 = new Label { Text = t.text("favorite", uiLang), VerticalTextAlignment = TextAlignment.Center, TextColor = Color.FromHex(AccentManager.MainTextAccent) };
 
             StackLayout stack1 = new StackLayout { Orientation = StackOrientation.Horizontal, Spacing = 10 };
             stack1.Children.Add(checkbox1);
@@ -189,8 +191,8 @@ namespace AvraamProject
 
             sortPicker = new Picker
             {
-                Title = "Выберите",
-                Items = { "По популярности", "По рейтингу", "По алфавиту", "Случайно" },
+                Title = t.text("choose", uiLang),
+                Items = { t.text("By popularity", uiLang), t.text("By rating", uiLang), t.text("By alphabet", uiLang), t.text("Random", uiLang) },
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center,
                 TextColor = Color.FromHex(AccentManager.MainTextAccent),
@@ -206,7 +208,7 @@ namespace AvraamProject
             // Label "Отсортировать:"
             var sortLabel = new Label
             {
-                Text = "Отсортировать:",
+                Text = t.text("sort", uiLang)+":",
                 FontSize = 16,
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center,
@@ -244,7 +246,7 @@ namespace AvraamProject
 
             var confirmButton = new Button
             {
-                Text = "Подтвердить",
+                Text = t.text("confirm", uiLang),
                 HorizontalOptions = LayoutOptions.Center,
                 Margin = new Thickness(0, 20, 0, 0),
                 TextColor = Color.FromHex(AccentManager.MainTextAccent),
@@ -255,7 +257,7 @@ namespace AvraamProject
 
             var searchEntry = new Entry
             {
-                Placeholder = "Поиск",
+                Placeholder = t.text("search", uiLang),
                 TextColor = Color.FromHex(AccentManager.MainTextAccent),
                 PlaceholderColor = Color.FromHex(AccentManager.SideTextAccent),
                 WidthRequest = Application.Current.MainPage.Width * 0.7 // Ширина в 70% от ширины экрана
@@ -273,7 +275,7 @@ namespace AvraamProject
                 }
                 else
                 {
-                    await DisplayAlert("Пожалуйста, подождите", "Поиск уже производится", "OK");
+                    await DisplayAlert(t.text("Please, wait", uiLang), t.text("Search is already being", uiLang), "OK");
                 }
             };
 
@@ -334,7 +336,7 @@ namespace AvraamProject
                 }
                 else
                 {
-                    await DisplayAlert("Пожалуйста, подождите", "Поиск уже производится", "OK");
+                    await DisplayAlert(t.text("Please, wait", uiLang), t.text("Search is already being", uiLang), "OK");
                 }
             };
             searchImage.GestureRecognizers.Add(SearchtapGesture);
@@ -395,12 +397,12 @@ namespace AvraamProject
                     {
                         selectedItems = new HashSet<string>
                         {
-                            "Развлечения",
-                            "Гастрономия",
-                            "Отдых",
-                            "Магазины",
-                            "Медицина",
-                            "Образование"
+                            t.text("entertainment", uiLang),
+                            t.text("gastronomy", uiLang),
+                            t.text("rest", uiLang),
+                            t.text("stores", uiLang),
+                            t.text("medicine", uiLang),
+                            t.text("education", uiLang)
                         };
                         await ToggleCloseImageVisibility();
                         await ToggleMenuItemsVisibility();
@@ -461,7 +463,7 @@ namespace AvraamProject
 
             if (tempPlaces.Count == 0)
             {
-                await DisplayAlert("Не найдено ни одного места", "Попробуйте изменить параметры поиска", "Ок");
+                await DisplayAlert(t.text("Not a single place was found", uiLang), t.text("Try changing the search parameters", uiLang), "OK");
             }
             else
             {
@@ -555,7 +557,7 @@ namespace AvraamProject
                     {
                         new Label
                         {
-                            Text = "На этом всё!",
+                            Text = t.text("That's it!", uiLang),
                             FontSize = 20,
                             TextColor = Color.FromHex(AccentManager.MainTextAccent),
                             HorizontalOptions = LayoutOptions.Center,
@@ -563,7 +565,7 @@ namespace AvraamProject
                         },
                         new Label
                         {
-                            Text = "Не нашли, что искали? Попробуйте изменить параметры поиска",
+                            Text = t.text("Didn't find what you were looking for? Try changing the search parameters", uiLang),
                             FontSize = 18,
                             TextColor = Color.FromHex(AccentManager.SideTextAccent),
                             HorizontalOptions = LayoutOptions.Center,
@@ -635,7 +637,7 @@ namespace AvraamProject
                 isFavoriteFilter = false;
                 CheckBox checkbox1 = new CheckBox { WidthRequest = 25, HeightRequest = 25, Color = Color.FromHex(AccentManager.MainTextAccent) };
                 SvgCachedImage icon1 = new SvgCachedImage { Source = "AvraamProject/Resources/drawable/starfull.svg", WidthRequest = 35, HeightRequest = 35, ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "fill=\"#000000\"", $"fill=\"{AccentManager.MainTextAccent}\"" } } };
-                Label label1 = new Label { Text = "Избранное", VerticalTextAlignment = TextAlignment.Center, TextColor = Color.FromHex(AccentManager.MainTextAccent) };
+                Label label1 = new Label { Text = t.text("favorite", uiLang), VerticalTextAlignment = TextAlignment.Center, TextColor = Color.FromHex(AccentManager.MainTextAccent) };
 
                 StackLayout stack1 = new StackLayout { Orientation = StackOrientation.Horizontal, Spacing = 10, Opacity = 0 };
                 stack1.Children.Add(checkbox1);

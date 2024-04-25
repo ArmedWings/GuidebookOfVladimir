@@ -6,6 +6,7 @@ using AvraamProject.Models;
 using FFImageLoading.Svg.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.PinchZoomImage;
+using lang;
 
 namespace AvraamProject
 {
@@ -23,6 +24,7 @@ namespace AvraamProject
                 countLabel.Text = $"{carouselView.Position + 1}/{images.Count}";
             }
         }
+        private static string uiLang = Application.Current.Properties["Language"].ToString();
         public PlaceDetailPage(int placeId)
         {
             var place = PlaceData.GetPlaceById(placeId);  // Получение информации о месте по Id
@@ -148,7 +150,7 @@ namespace AvraamProject
 
             var openInBrowserButton = new Button
             {
-                Text = "Открыть в интернете",
+                Text = t.text("Open in browser", uiLang),
                 BackgroundColor = Color.FromHex(AccentManager.SideAppAccent),
                 TextColor = Color.FromHex(AccentManager.MainTextAccent),
                 Margin = new Thickness(15),
@@ -164,7 +166,7 @@ namespace AvraamProject
 
             var viewOnMapButton = new Button
             {
-                Text = "Посмотреть на карте",
+                Text = t.text("View on map", uiLang),
                 BackgroundColor = Color.FromHex(AccentManager.SideAppAccent),
                 TextColor = Color.FromHex(AccentManager.MainTextAccent),
                 Margin = new Thickness(15),
@@ -184,7 +186,7 @@ namespace AvraamProject
                 var webViewPage = new ContentPage
                 {
                     Content = webView,
-                    Title = "Карта"
+                    Title = t.text("Map", uiLang)
                 };
 
                 Navigation.PushAsync(webViewPage);

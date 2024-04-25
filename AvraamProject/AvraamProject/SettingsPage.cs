@@ -17,8 +17,9 @@ namespace AvraamProject
         public SettingsPage()
         {
             BackgroundColor = Color.FromHex(AccentManager.SideAppAccent);
+            Title = t.text("Settings", uiLang);
             // Создаем основной StackLayout с отступом слева 20 пикселей
-            
+
             var mainLayout = new StackLayout
             {
                 Margin = new Thickness(10, 5, 10, 0)
