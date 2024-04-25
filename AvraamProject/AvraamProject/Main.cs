@@ -253,13 +253,21 @@ namespace AvraamProject
 
             isFunctionRunning = false;
 
+            var searchEntry = new Entry
+            {
+                Placeholder = "Поиск",
+                TextColor = Color.FromHex(AccentManager.MainTextAccent),
+                PlaceholderColor = Color.FromHex(AccentManager.SideTextAccent),
+                WidthRequest = Application.Current.MainPage.Width * 0.7 // Ширина в 70% от ширины экрана
+            };
+
             confirmButton.Clicked += async (sender, e) =>
             {
                 if (!isFunctionRunning)  // Проверка, не запущена ли функция
                 {
                     
                     isFunctionRunning = true;  // Установка флага в true перед запуском функции
-                    CreatePlaceBlocks();
+                    CreatePlaceBlocks(searchEntry.Text);
                     await Task.Delay(2000);
                     isFunctionRunning = false;  // Сброс флага после завершения функции
                 }
@@ -285,13 +293,7 @@ namespace AvraamProject
             };
 
             // Элемент ввода текста для поиска
-            var searchEntry = new Entry
-            {
-                Placeholder = "Поиск",
-                TextColor = Color.FromHex(AccentManager.MainTextAccent),
-                PlaceholderColor = Color.FromHex(AccentManager.SideTextAccent),
-                WidthRequest = Application.Current.MainPage.Width * 0.7 // Ширина в 70% от ширины экрана
-            };
+            
 
             // Кнопка фильтра с SVG изображением
             var filterButton = new SvgCachedImage
