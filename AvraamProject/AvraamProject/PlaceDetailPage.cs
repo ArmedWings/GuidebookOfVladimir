@@ -5,6 +5,7 @@ using AvraamProject.Data;
 using AvraamProject.Models;
 using FFImageLoading.Svg.Forms;
 using Xamarin.Forms;
+using Xamarin.Forms.PinchZoomImage;
 
 namespace AvraamProject
 {
@@ -74,18 +75,31 @@ namespace AvraamProject
                 ItemsSource = images,
                 ItemTemplate = new DataTemplate(() =>
                 {
+                    var pinchZoom = new PinchZoom();  // Инициализация PinchZoom
+
                     var image = new Image
                     {
-                        Aspect = Aspect.AspectFit,
-                        HeightRequest = 300,
-                        WidthRequest = Application.Current.MainPage.Width
+                        VerticalOptions = LayoutOptions.FillAndExpand,
+                        HorizontalOptions = LayoutOptions.FillAndExpand
                     };
+
+                    pinchZoom.Content = image;  // Установка содержимого для PinchZoom
+
+                    var tapGestureRecognizer = new TapGestureRecognizer();
+                    tapGestureRecognizer.Tapped += async (s, e) =>
+                    {
+                        var fullImageName = $"place{place.Id}_{carouselView.Position + 1}";
+                        await Application.Current.MainPage.Navigation.PushAsync(new FullScreenImageView(fullImageName));
+                    };
+
+                    image.GestureRecognizers.Add(tapGestureRecognizer);
                     image.SetBinding(Image.SourceProperty, ".");
-                    return image;
+
+                    return pinchZoom;
                 })
             };
 
-            
+
 
             countLabel = new Label
             {
@@ -225,6 +239,30 @@ namespace AvraamProject
             await Application.Current.SavePropertiesAsync();
 
             // Обновляем иконку
+        }
+    }
+    public class FullScreenImageView : ContentPage
+    {
+        public FullScreenImageView(string imageName)
+        {
+            BackgroundColor = Color.FromHex(AccentManager.SideAppAccent);
+            var pinchZoom = new PinchZoom
+            {
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                HorizontalOptions = LayoutOptions.FillAndExpand
+            };
+
+            var image = new Image
+            {
+                Source = imageName,
+                Aspect = Aspect.AspectFit,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                HorizontalOptions = LayoutOptions.FillAndExpand
+            };
+
+            pinchZoom.Content = image;
+
+            Content = pinchZoom;
         }
     }
 }
