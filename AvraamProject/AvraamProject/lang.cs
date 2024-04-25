@@ -378,6 +378,24 @@ namespace lang
                         { "en", "Public Medical Center" },
                     }
                 },
+                { "About", new Dictionary<string, string>()
+                    {
+                        { "ru", "О приложении" },
+                        { "en", "About" },
+                    }
+                },
+                { "The purpose of the application", new Dictionary<string, string>()
+                    {
+                        { "ru", "Цель приложения" },
+                        { "en", "The purpose of the application" },
+                    }
+                },
+                { "Purpose of...", new Dictionary<string, string>()
+                    {
+                        { "ru", "Цель приложения - предоставить пользователям удобный и эффективный инструмент для поиска, изучения и сохранения интересных мест и достопримечательностей во Владимире. Пользователи могут добавлять места в избранное, изучать новые локации, а также использовать приложение для планирования туристических маршрутов по городу." },
+                        { "en", "The purpose of the application is to provide users with a convenient and effective tool for searching, exploring and preserving interesting places and attractions in Vladimir. Users can add places to their favorites, explore new locations, and use the app to plan tourist routes around the city." },
+                    }
+                },
                 { "АДРЕС1", new Dictionary<string, string>()
                     {
                         { "ru", "ул. Большая Московская ул., 1а, Владимир, Владимирская обл., Россия, 600000" },

@@ -77,17 +77,17 @@ namespace AvraamProject
                 })
             });
 
-            var favoriteIco = new SvgCachedImage
+            var aboutIco = new SvgCachedImage
             {
-                Source = "AvraamProject/Resources/drawable/starfull.svg",
+                Source = "AvraamProject/Resources/drawable/info.svg",
                 ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "fill=\"#000000\"", $"fill=\"{AccentManager.MainTextAccent}\"" } },
             };
 
-            favoriteIco.GestureRecognizers.Add(new TapGestureRecognizer
+            aboutIco.GestureRecognizers.Add(new TapGestureRecognizer
             {
                 Command = new Command(() =>
                 {
-                    Navigation.PushAsync(new SettingsPage());
+                    Navigation.PushAsync(new AboutPage());
                 })
             });
 
@@ -106,14 +106,14 @@ namespace AvraamProject
             AbsoluteLayout.SetLayoutBounds(settingIco, new Rectangle(0.97, 0.02, 40, 40));
             AbsoluteLayout.SetLayoutFlags(settingIco, AbsoluteLayoutFlags.PositionProportional);
 
-            AbsoluteLayout.SetLayoutBounds(favoriteIco, new Rectangle(0.02, 0.02, 40, 40));
-            AbsoluteLayout.SetLayoutFlags(favoriteIco, AbsoluteLayoutFlags.PositionProportional);
+            AbsoluteLayout.SetLayoutBounds(aboutIco, new Rectangle(0.02, 0.02, 40, 40));
+            AbsoluteLayout.SetLayoutFlags(aboutIco, AbsoluteLayoutFlags.PositionProportional);
 
 
             AbsoluteLayout.Children.Add(scrollView);
             AbsoluteLayout.Children.Add(button1);
             AbsoluteLayout.Children.Add(settingIco);
-            AbsoluteLayout.Children.Add(favoriteIco);
+            AbsoluteLayout.Children.Add(aboutIco);
             AbsoluteLayout.Children.Add(Welcome);
 
             Content = AbsoluteLayout;
