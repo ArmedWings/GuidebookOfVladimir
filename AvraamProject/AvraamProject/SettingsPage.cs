@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using lang;
 using Xamarin.Forms;
 
 namespace AvraamProject
@@ -11,6 +12,7 @@ namespace AvraamProject
         private Button firstButton;
         private Button secondButton;
         private Button thirdButton;
+        private string uiLang = Application.Current.Properties["Language"].ToString();
         private int selectedButtonIndex = int.Parse(Application.Current.Properties["Accent"].ToString()); // Изначально выбрана кнопка в соответствии с сохраненным параметром
         public SettingsPage()
         {
@@ -28,12 +30,12 @@ namespace AvraamProject
             // Лэйбл "Язык"
             var languageLabel = new Label
             {
-                Text = "Язык",
+                Text = t.text("language", uiLang),
                 TextColor = Color.FromHex(AccentManager.MainTextAccent)
             };
             mainLayout.Children.Add(languageLabel);
 
-            switch (Application.Current.Properties["Language"] as string)
+            switch (uiLang as string)
             {
                 case "ru":
                     languageIndex = 0;
@@ -46,10 +48,10 @@ namespace AvraamProject
 
             languagePicker = new Picker
             {
-                Title = "Выберите язык",
+                Title = t.text("chooseLang", uiLang),
                 Items = { "Русский", "English" },
                 SelectedIndex = languageIndex,
-                TitleColor = Color.FromHex(AccentManager.SideTextAccent),
+                TitleColor = Color.Black,
                 BackgroundColor = Color.FromHex(AccentManager.MainAppAccent), // Установка фона всплывающего окна
                 TextColor = Color.FromHex(AccentManager.MainTextAccent) // Установка цвета текста выбранного элемента
             };
@@ -66,7 +68,7 @@ namespace AvraamProject
                     {
                         new Label
                         {
-                            Text = "Язык",
+                            Text = t.text("language", uiLang),
                             TextColor = Color.FromHex(AccentManager.SideTextAccent)
                         },
                         languagePicker
@@ -78,7 +80,7 @@ namespace AvraamProject
             // Лэйбл "Предпочтения"
             var preferencesLabel = new Label
             {
-                Text = "Предпочтения",
+                Text = t.text("preferences", uiLang),
                 TextColor = Color.FromHex(AccentManager.MainTextAccent)
             };
             mainLayout.Children.Add(preferencesLabel);
@@ -110,8 +112,8 @@ namespace AvraamProject
             };
             thirdButton.Clicked += CircleButtonClicked;
 
-            var alwaysRadio = new RadioButton { Content = "Всегда", TextColor = Color.FromHex(AccentManager.MainTextAccent) };
-            var neverRadio = new RadioButton { Content = "Никогда", TextColor = Color.FromHex(AccentManager.MainTextAccent) };
+            var alwaysRadio = new RadioButton { Content = t.text("always", uiLang), TextColor = Color.FromHex(AccentManager.MainTextAccent) };
+            var neverRadio = new RadioButton { Content = t.text("never", uiLang), TextColor = Color.FromHex(AccentManager.MainTextAccent) };
 
             var preferencesFrame = new Frame
             {
@@ -124,7 +126,7 @@ namespace AvraamProject
                     {
                         new Label
                         {
-                            Text = "Тема приложения",
+                            Text = t.text("appTheme", uiLang),
                             TextColor = Color.FromHex(AccentManager.SideTextAccent)
                         },
                         new StackLayout
@@ -173,7 +175,7 @@ namespace AvraamProject
                         },
                         new Label
                         {
-                            Text = "Полный экран",
+                            Text = t.text("fullScreen", uiLang),
                             TextColor = Color.FromHex(AccentManager.SideTextAccent),
                             Margin = new Thickness(0, 10, 0, 5)
                         },
@@ -195,13 +197,13 @@ namespace AvraamProject
                     break;
             }
 
-            var FullRadio = new RadioButton { Content = "Высокое качество фона", TextColor = Color.FromHex(AccentManager.MainTextAccent) };
-            var LowRadio = new RadioButton { Content = "Размытый фон", TextColor = Color.FromHex(AccentManager.MainTextAccent) };
-            var SimpleRadio = new RadioButton { Content = "Монотонный фон", TextColor = Color.FromHex(AccentManager.MainTextAccent) };
+            var FullRadio = new RadioButton { Content = t.text("highQBG", uiLang), TextColor = Color.FromHex(AccentManager.MainTextAccent) };
+            var LowRadio = new RadioButton { Content = t.text("blurBG", uiLang), TextColor = Color.FromHex(AccentManager.MainTextAccent) };
+            var SimpleRadio = new RadioButton { Content = t.text("simpleBG", uiLang), TextColor = Color.FromHex(AccentManager.MainTextAccent) };
 
             var optLabel = new Label
             {
-                Text = "Оптимизация",
+                Text = t.text("optimization", uiLang),
                 TextColor = Color.FromHex(AccentManager.MainTextAccent)
             };
             mainLayout.Children.Add(optLabel);
@@ -217,7 +219,7 @@ namespace AvraamProject
                     {
                         new Label
                         {
-                            Text = "Задний фон",
+                            Text = t.text("bg", uiLang),
                             TextColor = Color.FromHex(AccentManager.SideTextAccent)
                         },
                         FullRadio,
@@ -244,7 +246,7 @@ namespace AvraamProject
             // Кнопка "Подтвердить"
             var confirmButton = new Button
             {
-                Text = "Подтвердить",
+                Text = t.text("confirm", uiLang),
                 TextColor = Color.FromHex(AccentManager.MainTextAccent),
                 BackgroundColor = Color.FromHex(AccentManager.MainAppAccent),
                 CornerRadius = 10
