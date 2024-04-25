@@ -261,9 +261,11 @@ namespace AvraamProject
                 switch (languagePicker.SelectedIndex)
                 {
                     case 0:
+                        if (uiLang == "en") await App.Current.MainPage.DisplayAlert("", t.text("To change the language, restart the applications", uiLang), "OK");
                         Application.Current.Properties["Language"] = "ru";
                         break;
                     case 1:
+                        if (uiLang == "ru") await App.Current.MainPage.DisplayAlert("", t.text("To change the language, restart the applications", uiLang), "OK");
                         Application.Current.Properties["Language"] = "en";
                         break;
                 }
@@ -300,6 +302,7 @@ namespace AvraamProject
                     myService.SetStatusBarColor(Color.FromHex(AccentManager.MainAppAccent));
                     myService.SetFullScreen();
                 }
+
                 Xamarin.Forms.Application.Current.MainPage = new NavigationPage(new StartPage())
                 {
                     BarBackgroundColor = Color.FromHex(AccentManager.MainAppAccent),

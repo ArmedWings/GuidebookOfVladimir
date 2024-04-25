@@ -48,7 +48,7 @@ namespace AvraamProject
                 GradientStops = new GradientStopCollection
                 {
                     new GradientStop { Color = Color.FromHex(AccentManager.MainAppAccent), Offset = 0.0f },
-                    new GradientStop { Color = Color.FromHex(AccentManager.SideTextAccent), Offset = 1.0f }
+                    new GradientStop { Color = Color.FromHex(AccentManager.SideTextAccent), Offset = 3.0f }
                 }
             };
             Button button1 = new Button

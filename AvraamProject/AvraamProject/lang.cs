@@ -420,6 +420,24 @@ namespace lang
                         { "en", "The purpose of the application is to provide users with a convenient and effective tool for searching, exploring and preserving interesting places and attractions in Vladimir. Users can add places to their favorites, explore new locations, and use the app to plan tourist routes around the city." },
                     }
                 },
+                { "Successfull", new Dictionary<string, string>()
+                    {
+                        { "ru", "Успешно" },
+                        { "en", "Successfull" },
+                    }
+                },
+                { "To change the language, restart the applications", new Dictionary<string, string>()
+                    {
+                        { "ru", "Для изменения языка перезагрузите приложение" },
+                        { "en", "To change the language, restart the applications" },
+                    }
+                },
+                { "Address was copied to clipboard", new Dictionary<string, string>()
+                    {
+                        { "ru", "Адрес скопирован в буфер обмена" },
+                        { "en", "Address was copied to clipboard" },
+                    }
+                },
                 { "АДРЕС1", new Dictionary<string, string>()
                     {
                         { "ru", "ул. Большая Московская ул., 1а, Владимир, Владимирская обл., Россия, 600000" },

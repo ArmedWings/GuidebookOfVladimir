@@ -7,6 +7,7 @@ using FFImageLoading.Svg.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.PinchZoomImage;
 using lang;
+using Xamarin.Essentials;
 
 namespace AvraamProject
 {
@@ -145,7 +146,18 @@ namespace AvraamProject
                 Text = place.Address,
                 FontSize = 16,
                 Margin = new Thickness(10),
-                TextColor = Color.FromHex(AccentManager.SideTextAccent)
+                TextColor = Color.FromHex(AccentManager.SideTextAccent),
+                GestureRecognizers =
+                {
+                    new TapGestureRecognizer
+                    {
+                        Command = new Command(async () =>
+                        {
+                            await Clipboard.SetTextAsync(place.Address);
+                            await App.Current.MainPage.DisplayAlert(t.text("Successfull", uiLang), t.text("Address was copied to clipboard", uiLang), "OK");
+                        })
+                    }
+                }
             };
 
             var openInBrowserButton = new Button
