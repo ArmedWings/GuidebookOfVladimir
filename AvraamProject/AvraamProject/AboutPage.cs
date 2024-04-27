@@ -2,6 +2,7 @@
 using FFImageLoading.Svg.Forms;
 using System;
 using lang;
+using Xamarin.Essentials;
 
 namespace AvraamProject
 {
@@ -60,7 +61,7 @@ namespace AvraamProject
                     },
                     new Label
                     {
-                        Text = "v1.3.0",
+                        Text = "v"+VersionTracking.CurrentVersion,
                         FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Label)),
                         TextColor = Color.FromHex(AccentManager.SideTextAccent),
                         HorizontalOptions = LayoutOptions.Center,
