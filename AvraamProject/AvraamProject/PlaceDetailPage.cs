@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.PinchZoomImage;
 using lang;
 using Xamarin.Essentials;
+using System.Threading.Tasks;
 
 namespace AvraamProject
 {
@@ -101,6 +102,8 @@ namespace AvraamProject
                     return pinchZoom;
                 })
             };
+
+            DeviceDisplay.MainDisplayInfoChanged += OnMainDisplayInfoChanged;
 
 
 
@@ -254,7 +257,24 @@ namespace AvraamProject
 
             // Обновляем иконку
         }
+        private void OnMainDisplayInfoChanged(object sender, DisplayInfoChangedEventArgs e)
+        {
+            SetPos();
+        }
+        public async void SetPos()
+        {
+            await Task.Delay(250);
+            if (carouselView.Position == 0)
+            {
+                carouselView.Position = 2;
+            } else
+            {
+                carouselView.Position = carouselView.Position - 1;
+            }
+        }
     }
+
+
     public class FullScreenImageView : ContentPage
     {
         public FullScreenImageView(string imageName)

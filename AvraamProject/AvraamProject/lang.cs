@@ -191,7 +191,7 @@ namespace lang
                         { "en", "Please, wait" },
                     }
                 },
-                { "Search is already beingh", new Dictionary<string, string>()
+                { "Search is already being", new Dictionary<string, string>()
                     {
                         { "ru", "Поиск уже производится" },
                         { "en", "Search is already being" },

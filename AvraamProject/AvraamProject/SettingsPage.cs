@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using lang;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace AvraamProject
@@ -14,6 +15,10 @@ namespace AvraamProject
         private Button thirdButton;
         private string uiLang = Application.Current.Properties["Language"].ToString();
         private int selectedButtonIndex = int.Parse(Application.Current.Properties["Accent"].ToString()); // Изначально выбрана кнопка в соответствии с сохраненным параметром
+        private Frame preferencesFrame;
+        private StackLayout firstStackLayout;
+        private StackLayout secondStackLayout;
+        private StackLayout thirdStackLayout;
         public SettingsPage()
         {
             BackgroundColor = Color.FromHex(AccentManager.SideAppAccent);
@@ -116,7 +121,46 @@ namespace AvraamProject
             var alwaysRadio = new RadioButton { Content = t.text("always", uiLang), TextColor = Color.FromHex(AccentManager.MainTextAccent) };
             var neverRadio = new RadioButton { Content = t.text("never", uiLang), TextColor = Color.FromHex(AccentManager.MainTextAccent) };
 
-            var preferencesFrame = new Frame
+            firstStackLayout = new StackLayout
+            {
+                Orientation = StackOrientation.Vertical,
+                HorizontalOptions = LayoutOptions.Center,
+                Children =
+                {
+                    firstButton,
+                    new BoxView { Color = Color.FromHex(AccentManager.MainTextAccent), WidthRequest = 70, HeightRequest = 5, CornerRadius = 2.5, IsVisible = selectedButtonIndex == 1 }
+                },
+                // Оставляем отступы пока закомментированными
+                // Margin = new Thickness(0, 0, Application.Current.MainPage.Width / 10, 0)
+            };
+
+            // Создаем StackLayout
+            secondStackLayout = new StackLayout
+            {
+                Orientation = StackOrientation.Vertical,
+                HorizontalOptions = LayoutOptions.Center,
+                Children =
+                {
+                    secondButton,
+                    new BoxView { Color = Color.FromHex(AccentManager.MainTextAccent), WidthRequest = 70, HeightRequest = 5, CornerRadius = 2.5, IsVisible = selectedButtonIndex == 2 }
+                }
+            };
+
+            // Создаем StackLayout
+            thirdStackLayout = new StackLayout
+            {
+                Orientation = StackOrientation.Vertical,
+                HorizontalOptions = LayoutOptions.Center,
+                Children =
+                {
+                    thirdButton,
+                    new BoxView { Color = Color.FromHex(AccentManager.MainTextAccent), WidthRequest = 70, HeightRequest = 5, CornerRadius = 2.5, IsVisible = selectedButtonIndex == 3 }
+                },
+                // Оставляем отступы пока закомментированными
+                // Margin = new Thickness(Application.Current.MainPage.Width / 10, 0, 0, 0)
+            };
+
+            preferencesFrame = new Frame
             {
                 BackgroundColor = Color.FromHex(AccentManager.MainAppAccent),
                 CornerRadius = 10, // Скругляем углы
@@ -137,40 +181,11 @@ namespace AvraamProject
                             Children =
                             {
                                 // Первый StackLayout
-                                new StackLayout
-                                {
-                                    Orientation = StackOrientation.Vertical,
-                                    HorizontalOptions = LayoutOptions.Center,
-                                    Children =
-                                    {
-                                        firstButton,
-                                        new BoxView { Color = Color.FromHex(AccentManager.MainTextAccent), WidthRequest = 70, HeightRequest = 5, CornerRadius = 2.5, IsVisible = selectedButtonIndex == 1 }
-                                    },
-                                    Margin = new Thickness(0, 0, Application.Current.MainPage.Width / 10, 0)
-                                },
+                                firstStackLayout,
                                 // Второй StackLayout
-                                new StackLayout
-                                {
-                                    Orientation = StackOrientation.Vertical,
-                                    HorizontalOptions = LayoutOptions.Center,
-                                    Children =
-                                    {
-                                        secondButton,
-                                        new BoxView { Color = Color.FromHex(AccentManager.MainTextAccent), WidthRequest = 70, HeightRequest = 5, CornerRadius = 2.5, IsVisible = selectedButtonIndex == 2 }
-                                    }
-                                },
+                                secondStackLayout,
                                 // Третий StackLayout
-                                new StackLayout
-                                {
-                                    Orientation = StackOrientation.Vertical,
-                                    HorizontalOptions = LayoutOptions.Center,
-                                    Children =
-                                    {
-                                        thirdButton,
-                                        new BoxView { Color = Color.FromHex(AccentManager.MainTextAccent), WidthRequest = 70, HeightRequest = 5, CornerRadius = 2.5, IsVisible = selectedButtonIndex == 3 }
-                                    },
-                                    Margin = new Thickness(Application.Current.MainPage.Width / 10, 0, 0, 0)
-                                },
+                                thirdStackLayout,
                                 
                             }
                         },
@@ -186,6 +201,8 @@ namespace AvraamProject
                 }
             };
             mainLayout.Children.Add(preferencesFrame);
+            SetMargins();
+            DeviceDisplay.MainDisplayInfoChanged += OnMainDisplayInfoChanged;
 
 
             switch (Application.Current.Properties["Screen"] as string)
@@ -314,6 +331,16 @@ namespace AvraamProject
             
 
             Content = mainScrollView;
+        }
+        private void OnMainDisplayInfoChanged(object sender, DisplayInfoChangedEventArgs e)
+        {
+            SetMargins();
+        }
+        public async void SetMargins()
+        {
+            await Task.Delay(250);
+            firstStackLayout.Margin = new Thickness(0, 0, Application.Current.MainPage.Width / 10, 0);
+            thirdStackLayout.Margin = new Thickness(Application.Current.MainPage.Width / 10, 0, 0, 0);
         }
         private async void CircleButtonClicked(object sender, EventArgs e)
         {

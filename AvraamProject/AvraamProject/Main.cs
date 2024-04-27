@@ -445,6 +445,13 @@ namespace AvraamProject
                     tempPlaces = tempPlaces.Where(place => favoritePlacesIds.Contains(place.Id)).ToList();
                 }
             }
+            else 
+            {
+                if (isFavoriteFilter)
+                {
+                    tempPlaces.Clear();
+                }
+            }
 
             if (sortPicker.SelectedIndex == 0) tempPlaces = tempPlaces.OrderByDescending(p => p.Popularity).ToList();
             else if (sortPicker.SelectedIndex == 1) tempPlaces = tempPlaces.OrderByDescending(p => p.Rating).ToList();
